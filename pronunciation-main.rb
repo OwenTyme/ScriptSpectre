@@ -170,6 +170,7 @@ if flag("clean100")
 end
 
 if flag("jenny")
+    word("era", "ee'rah")
     # Oddly, Jenny shares this flaw with LibriTTS, though with slight differences
     word("slash", "\nslash\n")
     word("slashed", "\nslashed\n")
