@@ -269,7 +269,7 @@ end
 # A very unusual edge case that needs to be pronouced like a capital A
 # FIX ME?: Is this where this belongs?
 #   It could possibly be moved into a character-specific pronunciation script for LMS from Ashen Blades
-raw(/a([\.!?])/, "eh\\1")
+raw(/\ba([\.!?])/i, "eh\\1")
 
 
 

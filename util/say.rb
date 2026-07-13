@@ -20,7 +20,8 @@ ENABLE_PIPER_LIBRITTS = false
 # We need all the common data and functions from this file and those it requires
 require "#{File.dirname(__FILE__)}/../common.rb"
 
-SETTINGS["voice.say.info"] = true
+SETTINGS["voice.say.info"]          = true
+
 
 
 
@@ -29,6 +30,8 @@ name = "jenny"
 
 # read in the text and add newlines for sentence ends
 text=STDIN.read
+text.gsub!(/#{OPEN_QUOTE2}/, "")
+text.gsub!(/#{CLOSE_QUOTE2}/, "")
 text.gsub!(/\.[ \t]+/, ".\n")
 text.gsub!(/\![ \t]+/, "!\n")
 text.gsub!(/\?[ \t]+/, "?\n")

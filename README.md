@@ -5,7 +5,7 @@ Script Spectre is a set of [Ruby](https://www.ruby-lang.org) programs (and some 
 The basis of the name comes from thinking of TTS engines as disembodied voices, making the software like a ghost that reads a script.
 
 
-## Notes on Audio Scrips
+## Notes on Audio Scripts
 
 Currently, audio scripts should be in ODT format, a limitation I intend to remove in the future, using a tagging system that uses square brackets, curly brackets and angle brackets for three distinct purposes:
 
@@ -17,7 +17,7 @@ Finally, angle brackets have special meaning to the turbo model of [Chatterbox](
 
 For some example uses of all of the above, see [the example audio script](example/audiobook.odt), along with the [build file](example/build.rb) that produces audio from it.
 
-There's also an alternate example use in the [util directory](util), which includes a script for reading aloud and another for reading selected text from an user's screen, with a second activation causing it to kill the reading script.
+There's also an alternate example use in the [util directory](util), which includes a script for reading aloud and another for reading selected text from a user's screen, with a second activation causing it to kill the reading script.
 
 
 ## Dependencies
@@ -41,16 +41,16 @@ In order for this software to do any real work, at least one TTS engine must als
 * [qwentts.cpp](https://github.com/ServeurpersoCom/qwentts.cpp)
 * [VoxCPM](https://github.com/OpenBMB/VoxCPM)
 
-It is possible to connect other TTS engines (or alternative versions of them), but these are the engines the maintainer I've been able to get working reliably and which are of value to me.
+It is possible to connect other TTS engines (or alternative versions of them), but these are the engines I've been able to get working reliably and which are of value to me.
 
 How they're installed is up to you, but for the python software, I've found Conda to be the most reliable approach to creating isolated installs of AI software, but your mileage may vary.
 
 
-### Voice Changers/Resynthesizers/Filters
+### Voice Conversion/Resynthesizers/Filters
 
-This software can optionally run a step for voice changing (VC), which is also referred to as the filtering step, because more often than not the same mechanism is used for filtering noise, by plugging in other software.
+This software can optionally run a step for voice conversion (VC), which is also referred to as the filtering step, because more often than not the same mechanism is used for filtering noise, by plugging in other software.
 
-To do any voice changing work, at least one of these will have to be installed:
+To do any voice conversion work, at least one of these will have to be installed:
 
 * [Chatterbox](https://github.com/resemble-ai/chatterbox) - Most don't seem to realize it, but Chatterbox includes a voice changer
 * [Kanade Tokenizer](https://github.com/frothywater/kanade-tokenizer) - This includes a rather useful voice resynthesizer that can remove all sorts of noise from a sample, including reverb.  However, Kanade Tokenizer really tends to mess up whispered samples, making them into a raspy mess.  Note: Kanade Tokenizer writes audio files at 44.1 Khz.
@@ -65,7 +65,7 @@ The final stage in producing an audiobook with this software involves speech enh
 
 The following options for speech enhancement can be installed and used, which can also be used during the VC/filter stage:
 
-* [LavaSR](https://github.com/ysharma3501/LavaSR) - 48 Khz upscaler that can optionally also do a little noise removal.  This is the upscalre I prefer.
+* [LavaSR](https://github.com/ysharma3501/LavaSR) - 48 Khz upscaler that can optionally also do a little noise removal.  This is the upscaler I prefer.
 * [Resemble Enhance](https://github.com/resemble-ai/resemble-enhance) - 44.1 Khz up-scaler and noise remover.  This works rather well for audio enhancement, but every once in a while (about 1% of the time), it distorts a word, instead of making it clearer.  However, I've found that when the denoiser is used without the enhancement engine, it does an excellent job, without distorting words.  My recommendation: use this for noise removal only, then upscale with LavaSR.
 
 Again, how these are installed and connected is up to you.
