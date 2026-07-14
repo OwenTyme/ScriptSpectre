@@ -6,6 +6,7 @@
 #ProcessCtrl.set_process_name "say.rb"
 
 require "tmpdir"
+require "monitor"
 
 # Shut off all engines, except Piper
 ENABLE_CHATTERBOX = false
@@ -37,10 +38,65 @@ text.gsub!(/\![ \t]+/, "!\n")
 text.gsub!(/\?[ \t]+/, "?\n")
 
 
+# Simple concurrent queue
+class SyncQueue
+    def initialize()
+        # The actual queue
+        @queue = Array.new
+        
+        # Has this queue been marked done by the feeding thread?
+        @done = false
+    
+        # Synchronization Monitor
+        @lock = Monitor.new
+    end
+    
+    # Marks this SyncQueue as done
+    def done()
+        @lock.synchronize do
+            @done = true
+        end
+    end
+    
+    # True if and only if the quene has been marked done and is also empty
+    def done?()
+        @lock.synchronize do
+            if @done and @queue.empty?
+                return true
+            else
+                return false
+            end
+        end
+    end
+    
+    def push(value)
+        if value == nil
+            raise "SyncQueue can't hold nil!"
+        end
+        @lock.synchronize do
+            @queue.push(value)
+        end
+    end
+    
+    def shift()
+        while not done?
+            @lock.synchronize do
+                value = @queue.shift
+                unless value == nil
+                    return value
+                end
+            end
+            Thread.pass
+        end
+        return nil
+    end
+end
+
+
+
 # We need a temporary directory to store the audio files, so we can play them
 Dir.mktmpdir do |temp|
-    # Avoiding compression will keep things light, so well use wav format
-    audiofile="#{temp}/audiofile.wav"
+    queue = SyncQueue.new
     log_file="#{temp}/log.txt"
     system("touch #{log_file}")
     
@@ -48,15 +104,32 @@ Dir.mktmpdir do |temp|
     if voice == nil
         raise "Voice '#{name}' not found!"
     end
-        
-    # FIX ME: This ought to be done in a multi-threaded way, to allow audio to be generated on one thread, while another plays it
-    # But I don't know how to do that, just yet
-    text.each_line do |line|
-        voice.say(line, audiofile)
-        system("play -q \"#{audiofile}\"")
-        if $?.exitstatus != 0
-            raise "Play failure!"
+    
+    # Start a thread to fill the queue
+    Thread.new() {
+        count = 1
+        text.each_line do |line|
+            # Avoiding compression will keep things light, so well use wav format
+            audiofile="#{temp}/audiofile-#{count}.wav"
+            voice.say(line, audiofile)
+            queue.push(audiofile)
+            count = count + 1
         end
+        
+        queue.done
+    }
+    
+    # And the main thread will play the results
+    while not queue.done?
+        audiofile = queue.shift
+        unless audiofile == nil
+            puts "Playing '#{audiofile}'..."
+            system("play -q \"#{audiofile}\"")
+            if $?.exitstatus != 0
+                raise "Play failure!"
+            end
+        end
+        Thread.pass
     end
 end
 
