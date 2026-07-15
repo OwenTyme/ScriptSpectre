@@ -35,6 +35,7 @@ The following software must be installed and available on the command-line, in o
 In order for this software to do any real work, at least one TTS engine must also be installed and correctly pointed at via `config-user.rb`:
 
 * [Chatterbox](https://github.com/resemble-ai/chatterbox)
+* [Kitten](https://github.com/KittenML/KittenTTS)
 * [Parler](https://github.com/huggingface/parler-tts)
 * [Piper](https://github.com/rhasspy/piper)
 * [Pocket TTS](https://github.com/kyutai-labs/pocket-tts)

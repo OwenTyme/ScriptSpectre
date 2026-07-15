@@ -10,6 +10,7 @@ require "monitor"
 
 # Shut off all engines, except Piper
 ENABLE_CHATTERBOX = false
+ENABLE_KITTEN = false
 ENABLE_PARLER = false
 ENABLE_PIPER = true
 ENABLE_POCKET = false
@@ -21,7 +22,8 @@ ENABLE_PIPER_LIBRITTS = false
 # We need all the common data and functions from this file and those it requires
 require "#{File.dirname(__FILE__)}/../common.rb"
 
-SETTINGS["voice.say.info"]          = true
+# A little information if run from the terminal would be nice
+SETTINGS["voice.say.info"] = true
 
 
 
@@ -29,7 +31,8 @@ SETTINGS["voice.say.info"]          = true
 # Name of the voice to read with
 name = "jenny"
 
-# read in the text and add newlines for sentence ends
+
+# Read in the text and add newlines for sentence ends
 text=STDIN.read
 text.gsub!(/#{OPEN_QUOTE2}/, "")
 text.gsub!(/#{CLOSE_QUOTE2}/, "")

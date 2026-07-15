@@ -125,6 +125,8 @@ SCRIPT["pronounce"]                 = "#{CONFIG_DIR}/pronunciation-main.rb"
 # TTS scripts
 # Chatterbox is slow, but handles zero shot voice cloning rather well
 SCRIPT["tts-chatterbox"]            = "#{CONFIG_DIR}/tts-chatterbox.rb"
+# Kitten is fast and sounds decent
+SCRIPT["tts-kitten"]                = "#{CONFIG_DIR}/tts-kitten.rb"
 # Piper is fast AI, but low quality
 SCRIPT["tts-piper"]                 = "#{CONFIG_DIR}/tts-piper.rb"
 #  Pocket is the fastest available zero-shot voice cloning engine and works well on CPU
@@ -189,6 +191,7 @@ SCRIPT["resynth-miocodec"]          = "#{CONFIG_DIR}/filter-resynth-miocodec.rb"
 # Hash of commands to run TTS engines
 SAY_COMMANDS={}
 SAY_COMMANDS["chatterbox"]          = "#{SCRIPT_FAIL} Chatterbox command not set!"
+SAY_COMMANDS["kitten"]              = "#{SCRIPT_FAIL} Kitten command not set!"
 SAY_COMMANDS["parler"]              = "#{SCRIPT_FAIL} Parler command not set!"
 SAY_COMMANDS["piper"]               = "#{SCRIPT_FAIL} Piper command not set!"
 SAY_COMMANDS["voxcpm"]              = "#{SCRIPT_FAIL} VoxCPM command not set!"

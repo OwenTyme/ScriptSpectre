@@ -6,14 +6,18 @@
 # \____________________/
 # Directories used to find other files
 COMMON_DIR=File.absolute_path(File.dirname(__FILE__))
+
 # Feature flags require special handling, because the calling script is allowed to set them before calling this one
 #   That allows disabling features of this script by setting some of these to false!
+
+# Flags to enable default voices for each TTS engine
+#   Each is disabled by default, to allow enabling only the bare minimum of functionality
 if not defined?(ENABLE_CHATTERBOX)
     ENABLE_CHATTERBOX = false
 end
-
-# Flags to enable default voices for each TTS engine
-#   Each is disabled by default, to allow enabling the bare minimum of functionality
+if not defined?(ENABLE_KITTEN)
+    ENABLE_KITTEN = false
+end
 if not defined?(ENABLE_PARLER)
     ENABLE_PARLER = false
 end
@@ -32,6 +36,15 @@ end
 
 # Flags to enable individual models
 #   These are enabled by default
+if not defined?(ENABLE_KITTEN_NANO)
+    ENABLE_KITTEN_NANO = true
+end
+if not defined?(ENABLE_KITTEN_MICRO)
+    ENABLE_KITTEN_MICRO = true
+end
+if not defined?(ENABLE_KITTEN_MINI)
+    ENABLE_KITTEN_MINI = true
+end
 if not defined?(ENABLE_PARLER_JENNY)
     ENABLE_PARLER_JENNY = true
 end
@@ -102,6 +115,42 @@ if ENABLE_CHATTERBOX
     #   Here's the supported tages: <chuckle> <clear throat> <cough> <gasp> <groan> <laugh> <shush> <sigh> <sniff>
     VOICES["chatterbox-turbo"]  = Voice.new("#{SCRIPT["tts-chatterbox"]}",  pronunciation_command: "#{SCRIPT["pronounce"]} chatterbox",        model: "turbo",                                     speaker: ":0.5")
 end
+
+# Kitten had a nano, mnicro and mini models
+if ENABLE_KITTEN and ENABLE_KITTEN_NANO
+    VOICES["kitten-nano"]       = Voice.new("#{SCRIPT["tts-kitten"]}",      pronunciation_command: "#{SCRIPT["pronounce"]} kitten",            model: "KittenML/kitten-tts-nano-0.8")
+    copy_voice("nano-bella",    "kitten-nano",  speaker: "Bella")
+    copy_voice("nano-kiki",     "kitten-nano",  speaker: "Kiki")
+    copy_voice("nano-luna",     "kitten-nano",  speaker: "Luna")
+    copy_voice("nano-rosie",    "kitten-nano",  speaker: "Rosie")
+    copy_voice("nano-bruno",    "kitten-nano",  speaker: "Bruno")
+    copy_voice("nano-hugo",     "kitten-nano",  speaker: "Hugo")
+    copy_voice("nano-jasper",   "kitten-nano",  speaker: "Jasper")
+    copy_voice("nano-leo",      "kitten-nano",  speaker: "Leo")
+end
+if ENABLE_KITTEN and ENABLE_KITTEN_MICRO
+    VOICES["kitten-micro"]      = Voice.new("#{SCRIPT["tts-kitten"]}",      pronunciation_command: "#{SCRIPT["pronounce"]} kitten",            model: "KittenML/kitten-tts-micro-0.8")
+    copy_voice("micro-bella",   "kitten-micro", speaker: "Bella")
+    copy_voice("micro-kiki",    "kitten-micro", speaker: "Kiki")
+    copy_voice("micro-luna",    "kitten-micro", speaker: "Luna")
+    copy_voice("micro-rosie",   "kitten-micro", speaker: "Rosie")
+    copy_voice("micro-bruno",   "kitten-micro", speaker: "Bruno")
+    copy_voice("micro-hugo",    "kitten-micro", speaker: "Hugo")
+    copy_voice("micro-jasper",  "kitten-micro", speaker: "Jasper")
+    copy_voice("micro-leo",     "kitten-micro", speaker: "Leo")
+end
+if ENABLE_KITTEN and ENABLE_KITTEN_MINI
+    VOICES["kitten-mini"]       = Voice.new("#{SCRIPT["tts-kitten"]}",      pronunciation_command: "#{SCRIPT["pronounce"]} kitten",            model: "KittenML/kitten-tts-mini-0.8")
+    copy_voice("mini-bella",    "kitten-mini",  speaker: "Bella")
+    copy_voice("mini-kiki",     "kitten-mini",  speaker: "Kiki")
+    copy_voice("mini-luna",     "kitten-mini",  speaker: "Luna")
+    copy_voice("mini-rosie",    "kitten-mini",  speaker: "Rosie")
+    copy_voice("mini-bruno",    "kitten-mini",  speaker: "Bruno")
+    copy_voice("mini-hugo",     "kitten-mini",  speaker: "Hugo")
+    copy_voice("mini-jasper",   "kitten-mini",  speaker: "Jasper")
+    copy_voice("mini-leo",      "kitten-mini",  speaker: "Leo")
+end
+
 
 # FIX ME: Add all of the named Parler voices
 if ENABLE_PARLER

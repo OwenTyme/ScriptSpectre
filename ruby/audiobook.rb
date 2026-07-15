@@ -319,6 +319,7 @@ def main(odt_file, title_page: nil, credits_page: nil, thanks_page: nil)
     overwrite_enhance = false
     
     # Used for voice testing
+    mode_test = false
     #   The name of the voice to test; nil indicates no test
     test_voice = nil
     #   Text for the test voice to read
@@ -370,16 +371,17 @@ def main(odt_file, title_page: nil, credits_page: nil, thanks_page: nil)
             mode_review_sfx = true
         elsif arg == "--test"
             mode_tts = true
-            test_voice = ARGV.shift
-            if test_voice == nil
-                raise "Missing argument for --test switch!"
-            end
+            mode_test = true
         elsif arg == "--text"
+            mode_tts = true
+            mode_test = true
             test_text = ARGV.shift
             if test_text == nil
                 raise "Missing argument for --text switch!"
             end
         elsif arg == "--test-dir"
+            mode_tts = true
+            mode_test = true
             test_dir = ARGV.shift
             if test_dir == nil
                 raise "Missing argument for --test-dir switch!"
@@ -399,9 +401,9 @@ def main(odt_file, title_page: nil, credits_page: nil, thanks_page: nil)
             puts "    -r --review               TTS tasks should be run and manually reviewed by the user"
             puts "    -ra --review-all          TTS tasks should be run and all existing audio will be manually reviewed by the user"
             puts "    -rs --review-sfx          TTS tasks should be run and manually reviewed by the user, including sound effects"
-            puts "    --test VOICE              Name of the voice to test"
-            puts "    --text text               Text to be read with the --test switch, defaults to 3 Harvard sentences"
-            puts "    --text-dir DIR            Directory to store audio for the --test switch, defaults to 'test'"
+            puts "    --test                    Test voices instead of processing chapters"
+            puts "    --text text               As --test, but sets text for voice tests, defaults to 3 Harvard sentences"
+            puts "    --text-dir DIR            As --test, but sets directory to store audio, defaults to 'test'"
             puts "    -h --help                 Display this help message"
             puts ""
             exit
@@ -421,27 +423,29 @@ def main(odt_file, title_page: nil, credits_page: nil, thanks_page: nil)
     end
     
     # Test a voice, if specified
-    if test_voice != nil
+    if mode_test
         unless Dir.exist?(test_dir)
             FileUtils.mkdir_p(test_dir)
-        end
-        
-        # TTS is assumed, but filter and enhance steps are optional
-        tts_file = "#{test_dir}/#{test_voice}-tts.#{setting("audio.ext", "flac")}"
-        filter_file = nil
-        enhance_file = nil
-        if mode_vc
-            filter_file = "#{test_dir}/#{test_voice}-filtered.#{setting("audio.ext", "flac")}"
-        end
-        if mode_enhance
-            enhance_file = "#{test_dir}/#{test_voice}-enhanced.#{setting("audio.ext", "flac")}"
         end
         
         # Test the voice, but we want some visible feedback for the user
         SETTINGS["voice.say.info"] = true
         SETTINGS["voice.vc.info"] = true
         SETTINGS["voice.enhance.info"] = true
-        test_voice(test_voice, tts_file, vc_file: filter_file, enhance_file: enhance_file, text: test_text)
+        
+        chapters.each do |test_voice|
+            # TTS is assumed, but filter and enhance steps are optional
+            tts_file = "#{test_dir}/#{test_voice}-tts.#{setting("audio.ext", "flac")}"
+            filter_file = nil
+            enhance_file = nil
+            if mode_vc
+                filter_file = "#{test_dir}/#{test_voice}-filtered.#{setting("audio.ext", "flac")}"
+            end
+            if mode_enhance
+                enhance_file = "#{test_dir}/#{test_voice}-enhanced.#{setting("audio.ext", "flac")}"
+            end
+            test_voice(test_voice, tts_file, vc_file: filter_file, enhance_file: enhance_file, text: test_text)
+        end
         
     # Otherwise, we work on an audiobook
     else
