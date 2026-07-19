@@ -394,7 +394,7 @@ def main(odt_file, title_page: nil, credits_page: nil, thanks_page: nil)
             puts "    -t --tts                  Text to speech (TTS) tasks should be run"
             puts "    -f --filter               Filter tasks should be run, including voice conversion"
             puts "    -e --enhance              Audio enhancement tasks should be run"
-            puts "    -F --final                Finalization tasks should be run, to produce chater audio tracks"
+            puts "    -F --final                Finalization tasks should be run, to produce chapter audio tracks"
             puts "    -ot --overwrite-tts       Overwrite existing TTS audio"
             puts "    -of --overwrite-filter    Overwrite existing filter audio"
             puts "    -oe --overwrite-enhance   Overwrite existing enhanced audio"

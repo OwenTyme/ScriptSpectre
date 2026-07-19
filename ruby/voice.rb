@@ -629,7 +629,7 @@ class VoiceLine
     def self.from_str(file_name, data)
         data = String(data).gsub(/\n/, " ")
         # Isolate the voice
-        voice = data.gsub(/\n/, " ").scan(/\[[a-zA-Z_ ]*\]/)
+        voice = data.gsub(/\n/, " ").scan(/\[[a-zA-Z0-9_ ]*\]/)
         if voice.size() < 1
             raise "No voice specified!"
         elsif voice.size() > 1
@@ -637,7 +637,7 @@ class VoiceLine
         end
         voice = voice[0].gsub("[", "").gsub("]", "")
         # Remove the voice name from the text and eliminate pointless whitespace
-        text = data.gsub(/\n/, " ").gsub(/\[[a-zA-Z_ ]*\]/, "").gsub(/^ */, "").gsub(/ *$/, "")
+        text = data.gsub(/\n/, " ").gsub(/\[[a-zA-Z0-9_ ]*\]/, "").gsub(/^ */, "").gsub(/ *$/, "")
         
         VoiceLine.new(file_name, voice, text)
     end
