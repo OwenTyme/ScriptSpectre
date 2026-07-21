@@ -129,13 +129,42 @@ end
 #   Removal of leading and trailing whitespace on each line
 #   Put each sentence on its own line
 #   Blank line removal is performed at various stages along the way, to keep the text clean of them
-def preprocess!(text, curly_replace=true, comments=false)
+def preprocess!(text, curly_replace: true, comments: false, directives: true, abbreviations: true)
+    # FIX ME: There must be a better and more modular way to do these abbreviations
+    if abbreviations
+        # Title abbreviations need to be spelled out very early, before other operations, due to the trailing periods
+        text.gsub!(/\badm\./i, "Admiral")
+        text.gsub!(/\bcapt\./i, "Captain")
+        text.gsub!(/\bcol\./i, "Colonel")
+        text.gsub!(/\bcmdr\./i, "Commander")
+        text.gsub!(/\bcpl\./i, "Corporal")
+        text.gsub!(/\bdr\./i, "Doctor")
+        text.gsub!(/\besq\./i, "Esquire")
+        text.gsub!(/\bgen\./i, "General")
+        text.gsub!(/\bj\.g\./i, "junior grade")
+        text.gsub!(/\blt\./i, "Lieutenant")
+        text.gsub!(/\bmaj\./i, "Major")
+        text.gsub!(/\bms\./i, "Miss")
+        text.gsub!(/\bmrs\./i, "Missus")
+        text.gsub!(/\bmr\./i, "Mister")
+        text.gsub!(/\bpvt\./i, "Private")
+        text.gsub!(/\bpfc\./i, "Private First Class")
+        text.gsub!(/\bsgt\./i, "Sergeant")
+        text.gsub!(/\bspc\./i, "Specialist")
+        # Country abbreviations
+        text.gsub!(/\bu\.s\./i, "you ess")
+        text.gsub!(/\bu\.s\.a\./i, "you ess eh")
+        text.gsub!(/\bu\.s\.s\.r\./i, "you ess ess are")
+        text.gsub!(/\bu\.k\./i, "you kay")
+        # Versus
+        text.gsub!(/\bvs\./i, "versus")
+    end
     # Character substitution for simplification
     #  But pausing for three periods is too long, so make this just two
     text.gsub!(/#{ELIPSIS}/, "..")
     text.gsub!(/#{OPEN_QUOTE1}/, "'")
     text.gsub!(/#{CLOSE_QUOTE1}/, "'")
-    # But we're stripping out double quotes of all sorts
+    # But we're stripping out double quotes of all sorts, because TTS engines tend to trip over them
     text.gsub!(/#{OPEN_QUOTE2}/, "")
     text.gsub!(/#{CLOSE_QUOTE2}/, "")
     text.gsub!(/\"/, "")
@@ -152,11 +181,13 @@ def preprocess!(text, curly_replace=true, comments=false)
     end
     # Blank line removal
     text.gsub!(/^[ \t]*\n/, "")
-    # Paragraph end
-    text.gsub!(/$/, "[paragraph_end]")
-    # Put square bracket text on it's own lines
-    text.gsub!(/\[/, "\n[")
-    text.gsub!(/\]/, "]\n")
+    if directives
+        # Paragraph end
+        text.gsub!(/$/, "[paragraph_end]")
+        # Put square bracket text on it's own lines
+        text.gsub!(/\[/, "\n[")
+        text.gsub!(/\]/, "]\n")
+    end
     # Remove leading and trailing spaces and tabs
     text.gsub!(/^[ \t]*/, "")
     text.gsub!(/[ \t]*$/, "")
@@ -168,12 +199,14 @@ def preprocess!(text, curly_replace=true, comments=false)
     text.gsub!(/\;[ \t]+/, "\n")
     # Blank line removal
     text.gsub!(/^[ \t]*\n/, "")
-    # Scene break directive
-    text.gsub!("* * *", "[scene_break]")
-    # Pointless paragraph end removal
-    text.gsub!(/\[paragraph_end\]\n\[paragraph_end\]/, "[paragraph_end]")
-    text.gsub!(/\[scene_break\]\n\[paragraph_end\]/, "[scene_break]")
-
+    if directives
+        # Scene break directive
+        text.gsub!("* * *", "[scene_break]")
+        # Pointless paragraph end removal
+        text.gsub!(/\[paragraph_end\]\n\[paragraph_end\]/, "[paragraph_end]")
+        text.gsub!(/\[scene_break\]\n\[paragraph_end\]/, "[scene_break]")
+    end
+    
     return text
 end
 

@@ -112,6 +112,20 @@ SETTINGS["tts.qwen.repetition_penalty"] = 1.05
 SETTINGS["tts.voxcpm.cfg"]          = 2.0
 
 
+# Settings for speaking aloud, at runtime
+#   Name of the TTS engine
+SETTINGS["speak.engine"]            = ""
+#   Name of the model for the TTS engine
+SETTINGS["speak.model"]             = ""
+#   Name of a specific speaker
+SETTINGS["speak.speaker"]           = ""
+#   Floating-point value to scale the length of audio by, to adjust speed of speaking
+#   Leaving this as nil uses the existing setting for the base voice for the specified engine and model
+SETTINGS["speak.length_scale"]      = nil
+#   SoX filters for the speaker
+SETTINGS["speak.filters"]           = "norm -3.2"
+
+
 
 #  _____________________________________________________
 # /                                                     \

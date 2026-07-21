@@ -17,13 +17,32 @@ raw("\"", "")
 # Ellipses aren't usually turned into pauses, much the same as some engines and models ignore commas
 # Three periods turned out to create pauses that are too long, so make it just two
 raw("#{ELIPSIS}", "..")
-# Title abbreviations
-raw(/\bdr\./i, "doctor")
-raw(/\bmr\./i, "mister")
-raw(/\bms\./i, "miss")
-raw(/\bmrs\./i, "missus")
+# Anything special thing with a trailing period needs to be spelled out, to avoid starting a new sentence
+#   Title abbreviations
+raw(/\badm\./i, "Admiral")
+raw(/\bcapt\./i, "Captain")
+raw(/\bcol\./i, "Colonel")
+raw(/\bcmdr\./i, "Commander")
+raw(/\bcpl\./i, "Corporal")
+raw(/\bdr\./i, "Doctor")
+raw(/\besq\./i, "Esquire")
+raw(/\bgen\./i, "General")
+raw(/\bj\.g\./i, "junior grade")
+raw(/\blt\./i, "Lieutenant")
+raw(/\bmaj\./i, "Major")
+raw(/\bms\./i, "Miss")
+raw(/\bmrs\./i, "Missus")
+raw(/\bmr\./i, "Mister")
+raw(/\bpvt\./i, "Private")
+raw(/\bpfc\./i, "Private First Class")
+raw(/\bsgt\./i, "Sergeant")
+raw(/\bspc\./i, "Specialist")
+#   Some country abbreviations
 raw(/\bu\.s\./i, "you ess")
-# Versus
+raw(/\bu\.s\.a\./i, "you ess eh")
+raw(/\bu\.s\.s\.r\./i, "you ess ess are")
+raw(/\bu\.k\./i, "you kay")
+#   Versus 
 raw(/\bvs\./i, "versus")
 # A special case of the general issue of bullet calibers, which had to be handled before periods are stripped out
 raw(/\b\.357/i, "three fifty seven")

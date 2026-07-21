@@ -20,6 +20,15 @@ SETTINGS["voice.vc.info"]           = false
 SETTINGS["voice.vc.debug"]          = false
 SETTINGS["voice.enhance.info"]      = false
 SETTINGS["voice.enhance.debug"]     = false
+# Settings for speaking aloud, at runtime
+# These have to be set for the util/say.rb script to work, though the details are engine-specific
+SETTINGS["speak.engine"]            = ""    # Use "piper" for Piper
+SETTINGS["speak.model"]             = ""    # Use "jenny" for the Jenny model, but default for Piper is "libritts"
+SETTINGS["speak.speaker"]           = ""    # Piper uses this for speaker number, but "" indicates zero
+# Optionally set to a floating point value to adjust speed of speech
+SETTINGS["speak.length_scale"]      = nil
+SETTINGS["speak.filters"]           = "norm -3.2"
+
 
 
 
