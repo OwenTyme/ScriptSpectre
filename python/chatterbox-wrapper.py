@@ -36,7 +36,10 @@ elif torch.backends.mps.is_available():
 else:
     device = "cpu"
 
-if modelname == 'turbo':
+if modelname == 'nano':
+    from chatterbox.tts_turbo import ChatterboxTurboTTS
+    model = ChatterboxTurboTTS.from_pretrained(device=device, nano=True)
+elif modelname == 'turbo':
     from chatterbox.tts_turbo import ChatterboxTurboTTS
     model = ChatterboxTurboTTS.from_pretrained(device=device)
 elif modelname == 'multi':
@@ -48,19 +51,16 @@ else:
     model = ChatterboxTTS.from_pretrained(device=device)
 
 if promptfile == '':
-    if modelname == 'turbo' or modelname == 'multi':
+    if modelname == 'turbo' or modelname == 'nano' or modelname == 'multi':
         wav = model.generate(text, temperature=float(temp))
     else:
         wav = model.generate(text, cfg_weight=float(weight), exaggeration=float(exag), temperature=float(temp))
 else:
-    if modelname == 'turbo' or modelname == 'multi':
+    if modelname == 'turbo' or modelname == 'nano' or modelname == 'multi':
         wav = model.generate(text, audio_prompt_path=promptfile, temperature=float(temp))
     else:
         wav = model.generate(text, audio_prompt_path=promptfile, cfg_weight=float(weight), exaggeration=float(exag), temperature=float(temp))
     wav = model.generate(text, audio_prompt_path=promptfile, cfg_weight=float(weight), exaggeration=float(exag), temperature=float(temp))
 
-# FIX ME: I should fix this to stream the data via stdout, to avoid using temporary files
-# Sadly, I don't have the slightest clue how to do that, because I don't know python very well
-# As it was, just doing argument parsing was fairly difficult for me
 torchaudio.save(outfile, wav, model.sr)
 

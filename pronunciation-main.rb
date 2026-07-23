@@ -42,8 +42,9 @@ raw(/\bu\.s\./i, "you ess")
 raw(/\bu\.s\.a\./i, "you ess eh")
 raw(/\bu\.s\.s\.r\./i, "you ess ess are")
 raw(/\bu\.k\./i, "you kay")
-#   Versus 
+#   Other abbreviations
 raw(/\bvs\./i, "versus")
+raw(/\bmt\./i, "Mount")
 # A special case of the general issue of bullet calibers, which had to be handled before periods are stripped out
 raw(/\b\.357/i, "three fifty seven")
 # Assuming a novel, allow for bullet calibers

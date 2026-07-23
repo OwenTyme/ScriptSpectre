@@ -20,9 +20,9 @@ require "#{File.dirname(__FILE__)}/plugin-tts.rb"
 
 # Speaker format: "AUDIO_FILE:CFG:EXAGGERATION:TEMPERATURE"
 speaker_parts=split_on_delim($speaker, ":", "|")
-if $model == "turbo" or $model == "multi"
+if $model == "turbo" or $model == "nano" or $model == "multi"
     if speaker_parts.length > 2
-        warn "[warning] Too many speaker parameters!\n\"turbo\" and \"multi\" models use only audio reference and CFG!"
+        warn "[warning] Too many speaker parameters!\n\"turbo\" \"nano\" and \"multi\" models use only audio reference and CFG!"
     end    
 else
     if speaker_parts.length > 4

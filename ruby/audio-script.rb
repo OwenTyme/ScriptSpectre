@@ -156,8 +156,9 @@ def preprocess!(text, curly_replace: true, comments: false, directives: true, ab
         text.gsub!(/\bu\.s\.a\./i, "you ess eh")
         text.gsub!(/\bu\.s\.s\.r\./i, "you ess ess are")
         text.gsub!(/\bu\.k\./i, "you kay")
-        # Versus
+        # Other abbreviations
         text.gsub!(/\bvs\./i, "versus")
+        text.gsub!(/\mt\./i, "Mount")
     end
     # Character substitution for simplification
     #  But pausing for three periods is too long, so make this just two

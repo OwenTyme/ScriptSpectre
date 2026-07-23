@@ -109,11 +109,13 @@ if ENABLE_CHATTERBOX
     VOICES["chatterbox"]        = Voice.new("#{SCRIPT["tts-chatterbox"]}",  pronunciation_command: "#{SCRIPT["pronounce"]} chatterbox",        model: "regular",                                   speaker: ":0.5:0.5:0.8")
     # The multilingual model supports more languages
     VOICES["chatterbox-multi"]  = Voice.new("#{SCRIPT["tts-chatterbox"]}",  pronunciation_command: "#{SCRIPT["pronounce"]} chatterbox",        model: "multi",                                     speaker: ":0.5")
-    # Turbo is the fastest and also supports a small list of paralinguistic tags
+    # Turbo is faster and trades support for emotional parameters for  a small list of paralinguistic tags
     #   The pronunciation script swaps in "[" and ]" for "<" and ">", to avoid conflict with speaker names:
     #   That allows mixing paraliguisting instructions with changes in speaker names
     #   Here's the supported tages: <chuckle> <clear throat> <cough> <gasp> <groan> <laugh> <shush> <sigh> <sniff>
     VOICES["chatterbox-turbo"]  = Voice.new("#{SCRIPT["tts-chatterbox"]}",  pronunciation_command: "#{SCRIPT["pronounce"]} chatterbox",        model: "turbo",                                     speaker: ":0.5")
+    # Nano can do the same as Turbo, but is even faster, at the cost of sounding slightly less natural
+    VOICES["chatterbox-nano"]   = Voice.new("#{SCRIPT["tts-chatterbox"]}",  pronunciation_command: "#{SCRIPT["pronounce"]} chatterbox",        model: "nano",                                      speaker: ":0.5")
 end
 
 # Kitten had a nano, mnicro and mini models
