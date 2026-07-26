@@ -82,12 +82,12 @@ while ARGV.length > 0
         $filters=ARGV.join(" ")
         ARGV.clear
     elsif arg == "-h" or arg == "--help"
-        puts        "Usage: #{File.basename(launched_from)} [OPTIONS] CHAPTERS..."
+        puts        "Usage: #{File.basename(launched_from)} [OPTIONS]"
         puts        ""
-        puts        "    -i --in AUDIOFILE     The audio file to use for input (required)"
-        puts        "    -o --out AUDIOFILE    The audio file to write to (required)"
+        puts        "    -i --in AUDIOFILE     The audio file to use for input (REQUIRED)"
+        puts        "    -o --out AUDIOFILE    The audio file to write to (REQUIRED)"
         if useprompt
-            puts    "    -p --prompt AUDIOFILE The audio file to use as a prompt (required)"
+            puts    "    -p --prompt AUDIOFILE The audio file to use as a prompt (REQUIRED)"
         end
         if usemodel
             puts    "    -m --model MODEL      The model to use, which is engine-specific"

@@ -73,14 +73,14 @@ require "#{COMMON_DIR}/config.rb"
 # \__________________________/
 # Some little utility methods to mimic shell scripts
 require "#{RUBY_DIR}/util.rb"
-# And this relates only to the Vox-CPM TTS engine, including data for some tested emotional descriptions
-if ENABLE_VOXCPM
-    require "#{RUBY_DIR}/emotion-voxcpm.rb"
-end
 # Voice and VoiceLine classes, plus related methods
 require "#{RUBY_DIR}/voice.rb"
 # Methods for preparing final data for reading and the actual reading, going from audiobook script to finalized audio
 require "#{RUBY_DIR}/audiobook.rb"
+# Provides data and methods to clone voices in various emotional states via VoxCPM
+if ENABLE_VOXCPM
+    require "#{RUBY_DIR}/emotion-voxcpm.rb"
+end
 
 
 

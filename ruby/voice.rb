@@ -5,6 +5,8 @@
 # \_________________________/
 # Used for comparing audio file dates
 require "fileutils"
+# We'll need temporary directories
+require "tmpdir"
 
 
 
@@ -15,6 +17,8 @@ require "fileutils"
 # Due to the sheer size, the constant holding the Harvard sentences is in another file
 # Also includes a method to obtain a specified count of Hardvard sentences in a String, separated by spaces
 require "#{File.absolute_path(File.dirname(__FILE__))}/harvard.rb"
+# For the audio review user interface
+require "#{File.absolute_path(File.dirname(__FILE__))}/ui.rb"
 
 
 
@@ -800,5 +804,170 @@ def clone_voices(voice_dir, glob_pattern, base_voice,
                 enhance_command: enhance_command, post_filters: post_filters, fade_in: fade_in, fade_out: fade_out,
                 pre_sentence_silence: pre_sentence_silence, sentence_silence: sentence_silence,
                 sound_effect: sound_effect, clean_filters: clean_filters)
+    end
+end
+
+# Uses voice to read text if not nil and the target file doesn't exist
+# If text is nil, then Harvard lines are used, the numbered determined by line_count
+# If review is true, then the audio file is played for the user, for the sake of final approval
+#   If they reject the audio, it will be generated anew, until approved or canceled
+def say_missing(voice, audio_out, text: nil, line_count: 3, review: false, review_message: nil, review_backtitle: "")
+    unless voice.is_a?(Voice)
+        raise "voice MUST be an instance of the Voice class!"
+    end
+    
+    # If the audio file already exists, there's nothing to do, so return false, indicating no work was done
+    if File.exist?(audio_out)
+        return false
+    end
+    
+    Dir.mktmpdir do |temp|
+        tts_file="#{temp}/tts.wav"
+        
+        accepted = false
+        while not accepted
+            #Use 3 Harvard lines if nil
+            if text == nil
+                readme = harvard_lines(line_count)
+            else
+                readme = String(text)
+            end
+            # Read the text for an audio file
+            voice.say(readme, tts_file)
+            # Review the audio, if required
+            if review
+                unless review_message == nil
+                    puts review_message
+                end
+                puts "Text: \"#{readme}\""
+                result = review_audio(tts_file, backtitle: review_backtitle)
+                # User is happy, so accept it
+                if result == REVIEW_YES
+                    accepted = true
+                # User canceled, indicating a desire to exit the program
+                elsif result == REVIEW_EXIT
+                    exit(true)
+                end
+                # The only other option indicates a redo, so start over
+            else
+                accepted = true
+            end
+        end
+        
+        system("sox \"#{tts_file}\" \"#{audio_out}\"")
+        if $?.exitstatus != 0
+            raise "SoX output failure!"
+        end
+    end
+    
+    return true
+end
+
+def vc_missing(voice, tts_file, audio_out, review: false, review_message: nil, review_backtitle: "")
+    unless voice.is_a?(Voice)
+        raise "voice MUST be an instance of the Voice class!"
+    end
+    
+    # If the audio file already exists and is newer than the TTS audio, there's nothing to do
+    # Alternatively, if the TTS audio doesn't exist, there's definitely nothing to do
+    # Either way, return false, indicating no work was done
+    #if File.exist?(audio_out) or (not File.exist?(tts_file))
+    #    return false
+    #end
+    if (not File.exist?(tts_file)) or FileUtils.uptodate?(audio_out, [tts_file])
+        return false
+    end
+    
+    Dir.mktmpdir do |temp|
+        vc_file="#{temp}/vc.wav"
+        
+        accepted = false
+        while not accepted
+            # VC/filter the TTS audio
+            voice.voice_convert(tts_file, vc_file)
+            # Review the audio, if required
+            if review
+                unless review_message == nil
+                    puts review_message
+                end
+                puts "Text: \"#{readme}\""
+                result = review_audio(vc_file, backtitle: review_backtitle)
+                # User is happy, so accept it
+                if result == REVIEW_YES
+                    accepted = true
+                # User canceled, indicating a desire to exit the program
+                elsif result == REVIEW_EXIT
+                    exit(true)
+                end
+                # The only other option indicates a redo, so start over
+            else
+                accepted = true
+            end
+        end
+        
+        system("sox \"#{vc_file}\" \"#{audio_out}\"")
+        if $?.exitstatus != 0
+            raise "SoX output failure!"
+        end
+        
+        return true
+    end
+end
+
+def enhance_missing(voice, tts_file, vc_file, audio_out, review: false, review_message: nil, review_backtitle: "")
+    unless voice.is_a?(Voice)
+        raise "voice MUST be an instance of the Voice class!"
+    end
+    
+    tts_exist = tts_file != nil and File.exist?(tts_file)
+    vc_exist = vc_file != nil and File.exist?(vc_file)
+    
+    # If the audio file already exists, there's nothing to do
+    # Alternatively, if the TTS audio doesn't exist, there's definitely nothing to do
+    # Either way, return false, indicating no work was done
+    #if File.exist?(audio_out) or ((not vc_exist) and (not tts_exist))
+    #    return false
+    #end
+    if ((not File.exist?(tts_file)) and (not File.exist?(vc_file))) or FileUtils.uptodate?(audio_out, [tts_file, vc_file])
+        return false
+    end
+    
+    Dir.mktmpdir do |temp|
+        enhance_file="#{temp}/enhance.wav"
+        
+        accepted = false
+        while not accepted
+            # Enhance the TTS or VC/filter audio
+            if vc_file != nil and File.exist?(vc_file)
+                voice.enhance(vc_file, enhance_file)
+            else
+                voice.enhance(tts_file, enhance_file)
+            end
+            # Review the audio, if required
+            if review
+                unless review_message == nil
+                    puts review_message
+                end
+                puts "Text: \"#{readme}\""
+                result = review_audio(enhance_file, backtitle: review_backtitle)
+                # User is happy, so accept it
+                if result == REVIEW_YES
+                    accepted = true
+                # User canceled, indicating a desire to exit the program
+                elsif result == REVIEW_EXIT
+                    exit(true)
+                end
+                # The only other option indicates a redo, so start over
+            else
+                accepted = true
+            end
+        end
+        
+        system("sox \"#{enhance_file}\" \"#{audio_out}\"")
+        if $?.exitstatus != 0
+            raise "SoX output failure!"
+        end
+        
+        return true
     end
 end
