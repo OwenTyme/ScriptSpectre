@@ -45,6 +45,8 @@ if cfg == nil
 end
 cfg=Float(cfg)
 
+# FIX ME: Add support for setting inference timesteps
+
 # VoxCPM needs some small adjustments to the text to read
 $text.gsub!(/\n/, " ")
 $text.gsub!(/([.!?]) /, "\\1.. ")

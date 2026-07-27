@@ -41,10 +41,13 @@ VOX_NEUTRAL=""                                              # Intentionally left
 VOX_SAD="Very intense sadness and slow pacing"
 VOX_SCARED="Very intense fear and fast pacing"              # Can be self-fed
 #VOX_SHOUT="Very intense yelling and fast pacing"            # Old shout prompt, not very reliable
-VOX_SHOUT="Very intense screaming and fast pacing"          # This seems to work better, but is still unreiable
+#VOX_SHOUT="Very intense screaming and fast pacing"          # This seems to work better, but is still unreiable
+# Just a little note: that ":3.0" on the end if the CFG weight to go with this emotion, to get VoxCPM to vary less
+#   Since thta seems to help with shout lines
+VOX_SHOUT="Very intense screaming, high crackle, very intense voice projection and fast pacing:3.0"
 VOX_SURPRISED="Very intense surprise and shock, fast pacing"
 VOX_TIRED="Very intensely tired and slow pacing"
-VOX_WHISPER="Whispering and slow pacing"
+VOX_WHISPER="Whispering, micro-pauses, close to microphone, low breathy pitch and slow pacing"
 VOX_WORRIED="Very intensely worried"
 
 
@@ -91,7 +94,9 @@ VOX_EMOTION["worry"] = VOX_WORRIED
 # /                           \
 # |  Emotion Utility Methods  |
 # \___________________________/
-def vox_emotion(clone_audio, emotion, line_count: 3, tts_output: nil, vc_output: nil, enhance_output: nil, review_tts: true, review_vc: false, review_enhance: false)
+def vox_emotion(clone_audio, emotion, line_count: 3,
+        tts_output: nil, vc_output: nil, enhance_output: nil,
+        review_tts: true, review_vc: false, review_enhance: false)
     emotion_prompt = VOX_EMOTION[String(emotion)]
     if emotion_prompt == nil
         raise "Unknown emotion: \"#{emotion}\""
