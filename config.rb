@@ -155,7 +155,7 @@ SCRIPT["tts-qwen-clone"]            = "#{CONFIG_DIR}/tts-qwen-clone.rb"
 #   This script handles the voice design feature (which takes a prompt for a voice desecription in place of an audio reference)
 #   This doesn't seem able to take accent requests, always producing an American accent
 # FIX ME: Commented out, because it hasn't been implemented yet
-#SCRIPT["tts-qwen-design"]           = "#{CONFIG_DIR}/tts-qwen-design.rb"
+SCRIPT["tts-qwen-design"]           = "#{CONFIG_DIR}/tts-qwen-design.rb"
 #  VoxCPM is similar to Parler, but far faster and more flexible, able to handle both accent and emotion requests, on top of voice cloning
 SCRIPT["tts-vox"]                   = "#{CONFIG_DIR}/tts-voxcpm.rb"
 
@@ -212,6 +212,7 @@ SAY_COMMANDS["voxcpm"]              = "#{SCRIPT_FAIL} VoxCPM command not set!"
 SAY_COMMANDS["pocket"]              = "#{SCRIPT_FAIL} Pocket TTS command not set!"
 SAY_COMMANDS["qwen-clone"]          = "#{SCRIPT_FAIL} Qwen TTS clone command not set!"
 SAY_COMMANDS["qwen-codec"]          = "#{SCRIPT_FAIL} Qwen TTS codec command not set!"
+SAY_COMMANDS["qwen-design"]         = "#{SCRIPT_FAIL} Qwen TTS design command not set!"
 
 
 

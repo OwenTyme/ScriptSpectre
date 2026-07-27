@@ -156,18 +156,16 @@ end
 
 # FIX ME: Add all of the named Parler voices
 if ENABLE_PARLER
-    VOICES["parler"]            = Voice.new("#{SCRIPT["tts-parler"]}",      pronunciation_command: "#{SCRIPT["pronounce"]} parler",            model: "parler-tts/parler-tts-mini-v1",
-                speaker: "Slightly expressive and animated, moderate speed.  The recording is of very high quality, with the speaker's voice sounding clear and very close up.")
+    VOICES["parler"]            = Voice.new("#{SCRIPT["tts-parler"]}",      pronunciation_command: "#{SCRIPT["pronounce"]} parler",            model: "parler-tts/parler-tts-mini-v1")
 
 end
 if ENABLE_PARLER and ENABLE_PARLER_JENNY
-    VOICES["jenny2"]                = Voice.new("#{SCRIPT["tts-parler"]}",  pronunciation_command: "#{SCRIPT["pronounce"]} parler",            model: "parler-tts/parler-tts-mini-jenny-30H",
-                speaker: "Slightly expressive and animated, moderate speed.  The recording is of very high quality, with the speaker's voice sounding clear and very close up.")
+    VOICES["jenny2"]                = Voice.new("#{SCRIPT["tts-parler"]}",  pronunciation_command: "#{SCRIPT["pronounce"]} parler",            model: "parler-tts/parler-tts-mini-jenny-30H")
 end
 
 # FIX ME: Add all of the voices for Piper moels, which will also need ENABLE_PIPER_ flags of their own!
 if ENABLE_PIPER and ENABLE_PIPER_JENNY
-    VOICES["jenny"]                 = Voice.new("#{SCRIPT["tts-piper"]}",   pronunciation_command: "#{SCRIPT["pronounce"]} piper jenny",       model: "#{$piper_model_dir}/jenny.onnx",            speaker: "0")
+    VOICES["jenny"]             = Voice.new("#{SCRIPT["tts-piper"]}",       pronunciation_command: "#{SCRIPT["pronounce"]} piper jenny",       model: "#{$piper_model_dir}/jenny.onnx",            speaker: "0")
 end
 if ENABLE_PIPER and ENABLE_PIPER_LIBRITTS
     VOICES["libritts"]          = Voice.new("#{SCRIPT["tts-piper"]}",       pronunciation_command: "#{SCRIPT["pronounce"]} piper libritts",    model: "#{$piper_model_dir}/libritts-high.onnx",    speaker: "0")
@@ -178,6 +176,7 @@ if ENABLE_POCKET
 end
 if ENABLE_QWEN
     VOICES["qwen-clone"]        = Voice.new("#{SCRIPT["tts-qwen-clone"]}",  pronunciation_command: "#{SCRIPT["pronounce"]} qwen")
+    VOICES["qwen-design"]       = Voice.new("#{SCRIPT["tts-qwen-design"]}", pronunciation_command: "#{SCRIPT["pronounce"]} qwen")
 end
 if ENABLE_VOXCPM
     VOICES["vox"]               = Voice.new("#{SCRIPT["tts-vox"]}",         pronunciation_command: "#{SCRIPT["pronounce"]} vox")
