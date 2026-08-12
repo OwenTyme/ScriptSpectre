@@ -358,6 +358,8 @@ word("golems", "gohlems")
 word("grâce", "grah")
 word("gravitas", "grav'ih'tass")
 word("gymnast", "gymnyst")
+word("hitchhiker", "hitch hiker")
+word("hitchhikers", "hitch hikers")
 # I'm surprised to find this in online dictionaries, classed as an interjection
 # Strange how a word was born from a little thinking sound
 word("hrm", "herm")
@@ -488,6 +490,8 @@ word("au", "eh you")
 # Air (or Aerospace) Warning and Control System
 # Another one with a unique pronunciation
 word("awacs", "eh whacks")
+# Absent WithOut Leave
+word("awol", "eh-wall")
 # Chief Executive Officer
 word("ceo", "see ee oh")
 # Carbon-Dioxide

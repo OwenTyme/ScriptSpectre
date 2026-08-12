@@ -6,7 +6,7 @@ require "tmpdir"
 
 $speaker=""
 $length_scale=1.0
-$fade_in=0.1
+$fade_in=0.05
 $fade_out=0.1
 $pre_sentence_silence=0.2
 $sentence_silence=0.35
