@@ -53,9 +53,9 @@ This software can optionally run a step for voice conversion (VC), which is also
 
 To do any voice conversion work, at least one of these will have to be installed:
 
-* [Chatterbox](https://github.com/resemble-ai/chatterbox) - Most don't seem to realize it, but Chatterbox includes a voice changer
+* [Chatterbox](https://github.com/resemble-ai/chatterbox) - Most don't seem to realize it, but Chatterbox includes a voice converter
 * [Kanade Tokenizer](https://github.com/frothywater/kanade-tokenizer) - This includes a rather useful voice resynthesizer that can remove all sorts of noise from a sample, including reverb.  However, Kanade Tokenizer really tends to mess up whispered samples, making them into a raspy mess.  Note: Kanade Tokenizer writes audio files at 44.1 Khz.
-* [MioCodec](https://github.com/Aratako/MioCodec) - This fork of Kanade Tokenizer handles whispers better, but I've found when it's used as a resyntesizer, it doesn't do quite as good a job.  Note: MioCodec writes audio files at 44.1 Khz.
+* [MioCodec](https://github.com/Aratako/MioCodec) - This fork of Kanade Tokenizer handles whispers better, but I've found when it's used as a resynthesizer, it doesn't do quite as good a job.  Note: MioCodec writes audio files at 44.1 Khz.
 
 Again, as with the TTS engines, how these are installed and connected is up to you.
 
