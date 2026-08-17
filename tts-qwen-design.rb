@@ -22,7 +22,7 @@ require "#{File.dirname(__FILE__)}/plugin-tts.rb"
 CODEC_COMMAND=SAY_COMMANDS["qwen-codec"]
 
 
-# Speaker format: "AUDIO_FILE:TEMPERATURE:TOP-K:TOP-P:REPETITION_PENALTY"
+# Speaker format: "SEED:DESCRIPTION:TEMPERATURE:TOP-K:TOP-P:REPETITION_PENALTY"
 speaker_parts=split_on_delim($speaker, ":", "|")
 if speaker_parts.length > 6
     warn "[warning] Too many speaker parameters!"

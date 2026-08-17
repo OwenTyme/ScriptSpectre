@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+# Generates emotional variations of a voice, via VoxCPM
+
 # This script is in the same directory as common, so this copy and pasted bit is fine
 COMMON_DIR=File.absolute_path(File.dirname(__FILE__))
 # We need conffig loaded, since we'll be calling user-defined scripts

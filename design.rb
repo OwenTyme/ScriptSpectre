@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+# Makes use of the Voice Design features of VoxCPM and Qwen
+
 # TTS engine enable flags, for the ones that can handle voice design
 ENABLE_PARLER = true
 ENABLE_QWEN = true
@@ -47,7 +49,7 @@ while ARGV.length > 0
         end
     elsif arg == "-o" or arg == "--out"
         out_file=ARGV.shift
-        if out_file == nil
+        if out_file == nil or out_file == ""
             raise "Missing file argument for '--out' switch!"
         end
     elsif arg == "-h" or arg == "--help"
@@ -81,6 +83,6 @@ end
 
 copy_voice("target", source, speaker: speaker)
 
-# FIX ME: Allow setting text to read or count of Harvard lines
+# FIX ME: Allow setting text to read and/or count of Harvard lines
 test_voice("target", out_file)
 

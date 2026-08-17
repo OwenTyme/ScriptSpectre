@@ -92,7 +92,7 @@ while ARGV.length > 0
         if usemodel
             puts    "    -m --model MODEL      The model to use, which is engine-specific"
         end
-        puts        "    --filters FILTERS...  "
+        puts        "    --filters             Indicates all arguments that follow are SoX filters applied as the audio is transcoded to the format indicated by file extension from --out switch"
         puts        "    -h --help             Display this help message"
         puts        ""
         exit

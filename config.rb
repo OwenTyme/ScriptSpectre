@@ -178,13 +178,16 @@ SCRIPT["enhance-lavasr"]            = "#{CONFIG_DIR}/enhance-lavasr.rb"
 SCRIPT["enhance-lavasr-denoise"]    = "#{CONFIG_DIR}/enhance-lavasr-denoise.rb"
 
 # VC scripts
-# Chatterbox is fairly slow and noisy, but works in a different manner from Kanade and MioCodec, which can sometimes be useful
+#  Chatterbox is fairly slow and noisy, but works in a different manner from Kanade and MioCodec, which can sometimes be useful
 SCRIPT["vc-chatterbox"]             = "#{CONFIG_DIR}/vc-chatterbox.rb"
 #  Kanade Tokenizer is relatively fast and high quality as a voice converter
 #   This requires the addition of a --prompt option, for an audio file as a conversion target
 SCRIPT["vc-kanade"]                 = "#{CONFIG_DIR}/vc-kanade.rb"
 #  MioCodec is a fork of Kanade Tokenizer that isn't as robust at most tasks, but it is faster and handles whispers better
 SCRIPT["vc-miocodec"]               = "#{CONFIG_DIR}/vc-miocodec.rb"
+#  The muddler script somewhat mixes two voice samples together, by combining the results of the Chatterbox VC and either Kanade or MioCodec
+#   The muddler shines best at combining whispers with other voice samples
+SCRIPT["vc-muddle"]                 = "#{CONFIG_DIR}/design-muddle.rb"
 #  Kanade Tokenizer can also serve as a resynthesizer, which can analyze an audio clip to determine its ideal characteristics
 #   Followed by voice converting the original sample to match that ideal version
 #   It can remove reverb, but sometimes fails on simple noise, mistaking it for breath sounds

@@ -217,6 +217,7 @@ if flag("piper")
     word("asterisks", "asteriks")
     word("copyright", "copy right")
     word("neither", "nyether")
+    word("predawn", "pre-dawn")
     word("prologue", "pro log")
     word("samurai", "samoorye")
     word("samurais", "samooryes")
@@ -261,6 +262,7 @@ if flag("pocket")
     word("megalomaniacal", "megalomin-aye'ikle")
     word("maniacal", "min-aye'ikle")
     word("maniacally", "min-aye'ikli")
+    word("propel", "pro-pell")
     word("samurai", "samoo-rye")
     
     # Fixes for words ending in 'ed', which get said in odd ways
@@ -278,6 +280,9 @@ if flag("pocket")
     name("macie", "Maysee")
     
     word("id", "eye dee")
+    
+    # Don't know why, but Pocket keeps pronouncing "F word" as "feff word" on its own, so let's fix that
+    word("f", "eff")
 end
 
 
