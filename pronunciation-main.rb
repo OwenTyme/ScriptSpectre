@@ -379,6 +379,7 @@ word("kraken", "crackin")
 word("layout", "lay out")
 word("layouts", "lay outs")
 word("macabre", "muh cob")
+word("manga", "monga")
 word("mannequin", "mannekin")
 word("mannequins", "mannekins")
 word("moviegoer", "movie goer")
@@ -532,6 +533,8 @@ word("iii", "three")
 word("iff", "eye ef ef")
 # Intravenous
 word("iv", "eye vee")
+# John F. Kennedy, abreviation for an airport name in New York, which used to be called Idlewild
+word("jfk", "jay eff kay")
 # Lysergic acid Diethylamide
 word("lsd", "el ess dee")
 # Landing Zone
