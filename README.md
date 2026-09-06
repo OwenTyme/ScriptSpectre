@@ -68,6 +68,6 @@ The following options for speech enhancement can be installed and used, which ca
 
 * [LavaSR](https://github.com/ysharma3501/LavaSR) - 48 kHz upscaler that can optionally also do a little noise removal.  I used to recommend this upscaler, but recently found it sometimes introduces noise a soft tinkling noise that's only audible at high volume, which may be an amplification of lip smacking sounds.
 * [Resemble Enhance](https://github.com/resemble-ai/resemble-enhance) - 44.1 kHz upscaler and noise remover.  This works rather well for audio enhancement, but every once in a while (about 1% of the time), it distorts a word, instead of making it clearer.  However, I've found that when the denoiser is used without the enhancement engine, it does an excellent job, without distorting words.
-* [CrispVoice](https://github.com/Francium-Tech/CrispVoice) - 44.1 kHz up-scaler, noise remover and voice enhancer that claims to produce studio-quality results, using multiple AI noise removers and voice enhancers.  This uses Resemble Enhance as part of its internal process.
+* [CrispVoice](https://github.com/Francium-Tech/CrispVoice) - 44.1 kHz up-scaler, noise remover and voice enhancer that claims to produce studio-quality results, using multiple AI noise removers and voice enhancers.  This uses Resemble Enhance as part of its internal process.  This is my current recommendation for a finishing enhancement process for audiobooks.
 
 Again, how these are installed and connected is up to you.
