@@ -176,6 +176,7 @@ SCRIPT["enhance-resemble"]          = "#{CONFIG_DIR}/enhance-resemble.rb"
 SCRIPT["enhance-lavasr"]            = "#{CONFIG_DIR}/enhance-lavasr.rb"
 #   This adds the denoising step
 SCRIPT["enhance-lavasr-denoise"]    = "#{CONFIG_DIR}/enhance-lavasr-denoise.rb"
+SCRIPT["enhance-crispvoice"]        = "#{CONFIG_DIR}/enhance-crispvoice.rb"
 
 # VC scripts
 #  Chatterbox is fairly slow and noisy, but works in a different manner from Kanade and MioCodec, which can sometimes be useful
@@ -252,6 +253,7 @@ ENHANCE_COMMANDS["lavasr"]          = "#{SCRIPT_FAIL} LavaSR command not set!"
 ENHANCE_COMMANDS["lavasr-denoise"]  = "#{SCRIPT_FAIL} LavaSR Denoise command not set!"
 ENHANCE_COMMANDS["resemble"]        = "#{SCRIPT_FAIL} Resemble Enhance command not set!"
 ENHANCE_COMMANDS["resemble-denoise"]= "#{SCRIPT_FAIL} Resemble Enhance Denoise command not set!"
+ENHANCE_COMMANDS["crispvoice"]      = "#{SCRIPT_FAIL} CrispVoice command not set!"
 
 
 

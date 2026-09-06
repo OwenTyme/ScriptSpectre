@@ -55,7 +55,7 @@ To do any voice conversion work, at least one of these will have to be installed
 
 * [Chatterbox](https://github.com/resemble-ai/chatterbox) - Most don't seem to realize it, but Chatterbox includes a voice changer
 * [Kanade Tokenizer](https://github.com/frothywater/kanade-tokenizer) - This includes a rather useful voice resynthesizer that can remove all sorts of noise from a sample, including reverb.  However, Kanade Tokenizer really tends to mess up whispered samples, making them into a raspy mess.  Note: Kanade Tokenizer writes audio files at 44.1 Khz.
-* [MioCodec](https://github.com/Aratako/MioCodec) - This fork of Kanade Tokenizer handles whispers better, but I've found when it's used as a resyntesizer, it doesn't do quite as good a job.  Note: MioCodec writes audio files at 44.1 Khz.
+* [MioCodec](https://github.com/Aratako/MioCodec) - This fork of Kanade Tokenizer handles whispers better, but I've found when it's used as a resyntesizer, it doesn't do quite as good a job.  Note: MioCodec writes audio files at 44.1 kHz.
 
 Again, as with the TTS engines, how these are installed and connected is up to you.
 
@@ -66,7 +66,8 @@ The final stage in producing an audiobook with this software involves speech enh
 
 The following options for speech enhancement can be installed and used, which can also be used during the VC/filter stage:
 
-* [LavaSR](https://github.com/ysharma3501/LavaSR) - 48 Khz upscaler that can optionally also do a little noise removal.  This is the upscaler I prefer.
-* [Resemble Enhance](https://github.com/resemble-ai/resemble-enhance) - 44.1 Khz up-scaler and noise remover.  This works rather well for audio enhancement, but every once in a while (about 1% of the time), it distorts a word, instead of making it clearer.  However, I've found that when the denoiser is used without the enhancement engine, it does an excellent job, without distorting words.  My recommendation: use this for noise removal only, then upscale with LavaSR.
+* [LavaSR](https://github.com/ysharma3501/LavaSR) - 48 kHz upscaler that can optionally also do a little noise removal.  I used to recommend this upscaler, but recently found it sometimes introduces noise a soft tinkling noise that's only audible at high volume, which may be an amplification of lip smacking sounds.
+* [Resemble Enhance](https://github.com/resemble-ai/resemble-enhance) - 44.1 kHz upscaler and noise remover.  This works rather well for audio enhancement, but every once in a while (about 1% of the time), it distorts a word, instead of making it clearer.  However, I've found that when the denoiser is used without the enhancement engine, it does an excellent job, without distorting words.
+* [CrispVoice](https://github.com/Francium-Tech/CrispVoice) - 44.1 kHz up-scaler, noise remover and voice enhancer that claims to produce studio-quality results, using multiple AI noise removers and voice enhancers.  This uses Resemble Enhance as part of its internal process.
 
 Again, how these are installed and connected is up to you.
