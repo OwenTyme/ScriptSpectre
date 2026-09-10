@@ -141,6 +141,8 @@ SCRIPT["pronounce"]                 = "#{CONFIG_DIR}/pronunciation-main.rb"
 SCRIPT["tts-chatterbox"]            = "#{CONFIG_DIR}/tts-chatterbox.rb"
 # Kitten is fast and sounds decent
 SCRIPT["tts-kitten"]                = "#{CONFIG_DIR}/tts-kitten.rb"
+# Pico TTS is very fast, but sounds robotic
+SCRIPT["tts-pico"]                  = "#{CONFIG_DIR}/tts-pico.rb"
 # Piper is fast AI, but low quality
 SCRIPT["tts-piper"]                 = "#{CONFIG_DIR}/tts-piper.rb"
 #  Pocket is the fastest available zero-shot voice cloning engine and works well on CPU
@@ -211,6 +213,7 @@ SAY_COMMANDS={}
 SAY_COMMANDS["chatterbox"]          = "#{SCRIPT_FAIL} Chatterbox command not set!"
 SAY_COMMANDS["kitten"]              = "#{SCRIPT_FAIL} Kitten command not set!"
 SAY_COMMANDS["parler"]              = "#{SCRIPT_FAIL} Parler command not set!"
+SAY_COMMANDS["pico"]                = "#{SCRIPT_FAIL} Pico TTS command not set!"
 SAY_COMMANDS["piper"]               = "#{SCRIPT_FAIL} Piper command not set!"
 SAY_COMMANDS["voxcpm"]              = "#{SCRIPT_FAIL} VoxCPM command not set!"
 SAY_COMMANDS["pocket"]              = "#{SCRIPT_FAIL} Pocket TTS command not set!"

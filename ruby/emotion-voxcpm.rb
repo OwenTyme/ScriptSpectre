@@ -96,7 +96,8 @@ VOX_EMOTION["worry"] = VOX_WORRIED
 # \___________________________/
 def vox_emotion(clone_audio, emotion, line_count: 3,
         tts_output: nil, vc_output: nil, enhance_output: nil,
-        review_tts: true, review_vc: false, review_enhance: false)
+        review_tts: true, review_vc: false, review_enhance: false,
+        vc_command: "", enhance_command: SCRIPT["enhance-crispvoice"])
     emotion_prompt = VOX_EMOTION[String(emotion)]
     if emotion_prompt == nil
         raise "Unknown emotion: \"#{emotion}\""
@@ -115,7 +116,7 @@ def vox_emotion(clone_audio, emotion, line_count: 3,
     # Prepare the voice we'll use to read, using some very default and basic assumptions
     voice = Voice.new("#{SCRIPT["tts-vox"]}", speaker: "#{clone_audio}:#{emotion_prompt}",
             pronunciation_command: "#{SCRIPT["pronounce"]} vox",
-            vc_command: SCRIPT["ehhance-resemble-denoise"], enhance_command: SCRIPT["enhance-lavasr-denoise"])
+            vc_command: vc_command, enhance_command: enhance_command)
     
     puts "Generating emotion \"#{emotion}\" for voice \"#{clone_audio}\""
     

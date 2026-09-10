@@ -305,6 +305,7 @@ raw(/\ba([\.!?])/i, "eh\\1")
 # Some words TTS engines commonly don't know or have trouble with in sentences
 #word("ablative", "ablate iive")
 # This is a common way to stretch absolutely
+word(".308", "three oh eight")
 word("ab so lute ly", "ab, so, lute, lee")
 word("albino", "albeye no")
 word("algae", "algee")
@@ -467,6 +468,8 @@ word("idlewild", "Idle-wild")
 word("isabelle", "Izabelle")
 # Name of a TTS engine
 word("kokoro", "Kokore'oh")
+# A location in Japan
+word("saitama", "sigh'tama")
 
 
 
@@ -491,6 +494,7 @@ word("acp", "eh see pee")
 word("asap", "eh sap")
 # This is a sniper rifle favored by police
 word("at308", "eh tee three oh eight")
+word("at 308", "eh tee three oh eight")
 # Astronomical Unit
 word("au", "eh you")
 # Air (or Aerospace) Warning and Control System

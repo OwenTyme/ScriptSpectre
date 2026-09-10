@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-# The entire point of this script is to display a helpful image when 
+# The entire point of this script is to display a helpful message for unconfigured scripts
 
 puts ARGV[0]
 puts "Please check your config files, because the script you've attempted to run isn't properly configured."

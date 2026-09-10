@@ -21,6 +21,9 @@ end
 if not defined?(ENABLE_PARLER)
     ENABLE_PARLER = false
 end
+if not defined?(ENABLE_PICO)
+    ENABLE_PICO = false
+end
 if not defined?(ENABLE_PIPER)
     ENABLE_PIPER = false
 end
@@ -160,9 +163,17 @@ if ENABLE_PARLER
 
 end
 if ENABLE_PARLER and ENABLE_PARLER_JENNY
-    VOICES["jenny2"]                = Voice.new("#{SCRIPT["tts-parler"]}",  pronunciation_command: "#{SCRIPT["pronounce"]} parler",            model: "parler-tts/parler-tts-mini-jenny-30H")
+    VOICES["jenny2"]            = Voice.new("#{SCRIPT["tts-parler"]}",      pronunciation_command: "#{SCRIPT["pronounce"]} parler",            model: "parler-tts/parler-tts-mini-jenny-30H")
 end
 
+if ENABLE_PICO
+    VOICES["pico-us"]           = Voice.new("#{SCRIPT["tts-pico"]}",        pronunciation_command: "#{SCRIPT["pronounce"]} pico",              model: "en-US")
+    VOICES["pico-gb"]           = Voice.new("#{SCRIPT["tts-pico"]}",        pronunciation_command: "#{SCRIPT["pronounce"]} pico",              model: "en-GB")
+    VOICES["pico-es"]           = Voice.new("#{SCRIPT["tts-pico"]}",        pronunciation_command: "#{SCRIPT["pronounce"]} pico",              model: "es-ES")
+    VOICES["pico-de"]           = Voice.new("#{SCRIPT["tts-pico"]}",        pronunciation_command: "#{SCRIPT["pronounce"]} pico",              model: "de-DE")
+    VOICES["pico-fr"]           = Voice.new("#{SCRIPT["tts-pico"]}",        pronunciation_command: "#{SCRIPT["pronounce"]} pico",              model: "fr-FR")
+    VOICES["pico-it"]           = Voice.new("#{SCRIPT["tts-pico"]}",        pronunciation_command: "#{SCRIPT["pronounce"]} pico",              model: "it-IT")
+end
 # FIX ME: Add all of the voices for Piper moels, which will also need ENABLE_PIPER_ flags of their own!
 if ENABLE_PIPER and ENABLE_PIPER_JENNY
     VOICES["jenny"]             = Voice.new("#{SCRIPT["tts-piper"]}",       pronunciation_command: "#{SCRIPT["pronounce"]} piper jenny",       model: "#{$piper_model_dir}/jenny.onnx",            speaker: "0")
